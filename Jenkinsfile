@@ -21,17 +21,17 @@ pipeline {
 
    stage('frontend') {
       steps {
-          sh 'docker build -t oumaymaboukadida/frontend -f GestionProduit/Dockerfile ./GestionProduit'
+          sh 'docker build -t oumayma140/frontend -f GestionProduit/Dockerfile ./GestionProduit'
           echo 'build docker image frontend done'
-          sh 'docker image push oumaymaboukadida/frontend'
+          sh 'docker image push oumayma140/frontend'
           echo 'push frontend done'
       }
       }
      stage('backend') {
       steps {
-          sh 'docker build -t oumaymaboukadida/backend -f GestionProduits/Dockerfile ./GestionProduits'
+          sh 'docker build -t oumayma140/backend -f GestionProduits/Dockerfile ./GestionProduits'
           echo 'build docker image backend done'
-          sh 'docker image push oumaymaboukadida/backend'
+          sh 'docker image push oumayma140/backend'
           echo 'push backend done'
       }
     }  
@@ -39,7 +39,7 @@ pipeline {
         {
             steps{
                 sh 'docker logout localhost:8080'
-                sh 'docker image rmi oumaymaboukadida/frontend oumaymaboukadida/backend'
+                sh 'docker image rmi oumayma140/frontend oumayma140/backend'
                 echo 'clean done'
             }
         }
