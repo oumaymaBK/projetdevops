@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        [(ngModel)]="filterTerm"
+      />
+    </div>
+<table class="table">
+    <thead class="thead-dark">
+     <tr>
+        <th>id</th>
+        <th>nom</th>
+        <th>prix</th>
+        <th>quantite</th>
+        <th>photo</th>
+        <th>categorie</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr
+        *ngFor="let p of produits | filter: filterTerm">
+        <td>{{p.id}}</td>
+       
+        <td><a routerLink="/liste/{{p.id}}">{{p.nom}}</a></td>
+        
+        <td>{{p.prix}}</td>
+        <td>{{p.quantite}}</td>
+        <td><img src="http://localhost:8080/restapiproduit/getImage/{{p.id}}" width="70"  height="70"></td>
+        <td>{{p.categorie.nom}}</td>
+
+    </tr>
+    </tbody>
+</table>
+</div>
