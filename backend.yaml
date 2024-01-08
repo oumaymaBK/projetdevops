@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gestion
+    labels:
+      app: gestion
+spec:
+    selector:
+      matchLabels:
+        app: gestion
+    strategy:
+      type: Recreate
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: gestion
+      spec:
+        containers:
+        - image: oumayma140/backend:latest
+          name: gestion
+          ports:
+          - containerPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: gestion-service-back
+spec:
+  selector:
+    app: gestion
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+
+            

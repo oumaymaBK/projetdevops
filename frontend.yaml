@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: gestion
+    labels:
+      app: gestion
+spec:
+    selector:
+      matchLabels:
+        app: gestion
+    strategy:
+      type: RollingUpdate
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: gestion
+      spec:
+        containers:
+        - image: oumayma140/frontend:latest
+          name: gestion
+          ports:
+          - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: gestion-service
+spec:
+    selector:
+      app: gestion
+    type: LoadBalancer
+    ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 80
+        nodePort: 30000
